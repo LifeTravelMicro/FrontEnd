@@ -1,0 +1,28 @@
+.table-wrapper {
+  width: 1024px;
+  margin: 50px auto;
+}
+table {
+  width: 100%;
+}
+mat-radio-button{
+  color: #000;
+}
+
+h1,h2 { color: black}
+
+input {color: black}
+
+tr.editable-row {
+  background-color: lightskyblue;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 16px;
+}
+
+form {
+  background-color: white;
+  padding: 15px 25px;
+  border-radius: 15px 15px 0 0;
+}

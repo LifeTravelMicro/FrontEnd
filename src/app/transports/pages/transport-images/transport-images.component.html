@@ -1,0 +1,95 @@
+<div class="table-wrapper">
+  <h1>Transports Images Form</h1>
+
+  <h2>{{ isEditMode ? "Edit Transport" : "Add new Transport Image" }}</h2>
+
+<!--  <pre class="text-[#000]">{{transportImagesData | json}}</pre>-->
+
+  <form (submit)="onSubmit()" #transportImagesForm="ngForm">
+    <div class="grid grid-cols-2 gap-x-8">
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          placeholder="Path"
+          name="path"
+          required
+          [(ngModel)]="transportImagesData.path"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Choose a Transport</mat-label>
+        <mat-select
+          name="transportId"
+          [(ngModel)]="transportImagesData.transportId"
+          required
+        >
+          <mat-option
+            *ngFor="let transport of transports"
+            [value]="transport.id"
+          >
+            ID: {{ transport.id }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="text-center my-8">
+      <ng-container *ngIf="isEditMode; else elseTemplate">
+        <div class="flex flex-column gap-2 justify-center">
+          <button mat-button class="bg-[#ee21ba] text-[#ffffff]">Update</button>
+          <button
+            mat-button
+            class="bg-[#ee21ba] text-[#ffffff]"
+            (click)="cancelEdit()"
+          >
+            Cancel
+          </button>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <button mat-button class="bg-[#ee21ba] text-[#ffffff]">Add</button>
+      </ng-template>
+    </div>
+  </form>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>#Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="travelerId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Transport id</th>
+      <td mat-cell *matCellDef="let element">{{ element.transportId }}</td>
+    </ng-container>
+
+		<ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
+      <td mat-cell *matCellDef="let element">{{ element.path }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+<!--        <a href="javascript:void(0)" (click)="editItem(element)"-->
+<!--          ><mat-icon>edit</mat-icon></a-->
+<!--        >-->
+<!--        |-->
+        <a href="javascript:void(0)" (click)="deleteItem(element.id)"
+          ><mat-icon>delete</mat-icon></a
+        >
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [ngClass]="{ 'editable-row': transportImagesData.id === row.id }"
+    ></tr>
+  </table>
+  <mat-paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 15]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

@@ -1,0 +1,119 @@
+<div id="btn-container">
+  <button mat-button mat-dialog-close>X</button>
+</div>
+<h1 mat-dialog-title>Extra Plan Information</h1>
+<div mat-dialog-content>
+
+<!--    <pre>{{data | json}}</pre>-->
+
+    <mat-tab-group>
+
+      <mat-tab label="Thumbnail">
+        <div class="p-8">
+          <img [src]="data.thumbnail">
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Agency">
+
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{agency.name}}</mat-card-title>
+            <mat-card-subtitle>{{agency.email}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>RUC: {{agency.ruc}}</p>
+          </mat-card-content>
+        </mat-card>
+            </mat-tab>
+
+            <mat-tab label="Accommodation">
+
+              <mat-card>
+               <mat-card-header>
+                    <mat-card-title>Location: {{accommodation.location}}</mat-card-title>
+              <mat-card-subtitle>Price: {{accommodation.price}}</mat-card-subtitle>
+            </mat-card-header>
+            <!-- preguntar si existe elementos en el arreglo -->
+						<div *ngIf="accommodation?.accommodationImages?.length > 0">
+							<div *ngFor="let image of accommodation?.accommodationImages">
+								<img mat-card-image [src]="accommodation?.accommodationImages[0].path" alt="Photo" class="w-[300px] h-[500px]">
+							</div>
+						</div>
+            <mat-card-content>
+              <h2>Details: </h2>
+              <p>
+                {{accommodation.details}}
+              </p>
+            </mat-card-content>
+
+        </mat-card>
+
+      </mat-tab>
+
+      <mat-tab label="Transport">
+
+        <mat-card>
+          <mat-card-header>
+                <mat-card-title>Type: {{transport.type}}</mat-card-title>
+                <mat-card-subtitle>Price: {{transport.price}}</mat-card-subtitle>
+              </mat-card-header>
+              <div *ngIf="transport?.transportimages?.length > 0">
+								<div *ngFor="let image of transport?.transportImages">
+									<img mat-card-image [src]="transport?.transportImages[0].path" alt="Photo" class="w-[300px] h-[500px]">
+								</div>
+							</div>
+              <mat-card-content>
+                <h2>Details: </h2>
+                <p>
+                  Seats {{transport.seats}}
+                </p>
+                <p>
+                  Departure Date: {{transport.departureDate}}
+                </p>
+                <p>
+                  Return Date: {{transport.returnDate}}
+                </p>
+              </mat-card-content>
+        </mat-card>
+
+
+      </mat-tab>
+
+      <mat-tab label="Tour">
+
+        <mat-card>
+          <mat-card-header>
+                <mat-card-title>Location: {{tour.location}}</mat-card-title>
+                <mat-card-subtitle>Price: {{tour.price}}</mat-card-subtitle>
+              </mat-card-header>
+              <div *ngIf="tour?.tourImages?.length > 0">
+									<!-- RECORRER LAS IMAGENES CON NGFOR -->
+									<div *ngFor="let image of tour?.tourImages">
+										<img mat-card-image [src]="image.path" alt="Photo" class="w-[300px] h-[500px]">
+									 </div>
+							</div>
+              <mat-card-content>
+                <h2>Details </h2>
+                <p>
+                  {{tour.details}}
+                </p>
+                <h2>Meeting Point</h2>
+                <p>
+                  {{tour.meetingPoint}}
+                </p>
+              </mat-card-content>
+        </mat-card>
+
+
+
+      </mat-tab>
+
+    </mat-tab-group>
+</div>
+
+
+<div mat-dialog-actions>
+<!--  <button mat-button mat-dialog-close>No</button>-->
+<!--  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>-->
+</div>

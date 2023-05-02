@@ -1,0 +1,53 @@
+<div id="btn-container">
+  <button mat-button mat-dialog-close>X</button>
+</div>
+<h1 mat-dialog-title>Extra Traveler Information</h1>
+<div mat-dialog-content>
+    <h1 class="text-3xl font-bold">Reviews</h1>
+
+  <!--      {-->
+  <!--        "id": 6,-->
+  <!--        "travelerId": 1,-->
+  <!--        "planId": 2,-->
+  <!--        "date": "2022-10-22",-->
+  <!--        "rating": "4",-->
+  <!--        "comment": "lorem20"-->
+  <!--      }-->
+
+    <div *ngIf="data?.length > 0 && !!data">
+        <div class="grid grid-cols-2 gap-2">
+          <mat-card *ngFor="let review of data;">
+            <h1 class="text-xl font-bold">Review #{{review.id}}</h1>
+
+            <ul class="grid grid-cols-2 gap-4 p-4" >
+              <li>
+                Comment:
+                {{review.comment}}
+              </li>
+              <li>
+                Rating:
+                {{review.rating}}
+              </li>
+              <li>
+                Date:
+                {{review.date}}
+              </li>
+              <li>
+                Plan id:
+                {{review.planId}}
+              </li>
+            </ul>
+          </mat-card>
+        </div>
+    </div>
+
+    <div *ngIf="data?.length === 0 || data === null">
+      <p class="text-3xl font-bold">No reviews yet</p>
+    </div>
+</div>
+
+
+<div mat-dialog-actions>
+<!--  <button mat-button mat-dialog-close>No</button>-->
+<!--  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>-->
+</div>

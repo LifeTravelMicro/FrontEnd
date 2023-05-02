@@ -1,0 +1,21 @@
+.mat-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-sidenav {
+  width: 250px;
+}
+
+input {
+  color: black;
+}
+
+#title {
+  text-align: center;
+  width: 100%;
+}
+
+.black-container {
+  background-color: #161d2f;
+  color: white;
+}

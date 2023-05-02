@@ -1,0 +1,93 @@
+{
+  "payments": [
+    {
+      "plan": {
+        "name": "Costa Azul",
+        "description": "Tour Playero",
+        "service": "html",
+        "nameCity": "Piura",
+        "nameCountry": "Peru",
+        "startDate": "2022-09-04T05:00:00.000Z",
+        "endDate": "2022-09-14T05:00:00.000Z",
+        "price": 150,
+        "id": 2,
+        "agency": {
+          "name": "Lifetravel",
+          "location": "Av. Jiron Union",
+          "ruc": 1134231231,
+          "email": "patrick_cuentas@hotmail.com",
+          "phone": 124124124124,
+          "id": 2
+        }
+      },
+      "description": "Informacion extra sobre el pago...",
+      "discount": "5",
+      "id": 1
+    }
+  ],
+  "travelers": [
+    {
+      "firstName": "Patrick",
+      "age": 21,
+      "lastName": "Cuentas",
+      "email": "patrick_cuentas@hotmail.com",
+      "phone": 123456789,
+      "id": 1
+    },
+    {
+      "firstName": "FEF",
+      "lastName": "EFEF",
+      "age": 1,
+      "email": "FEF",
+      "phone": 3,
+      "id": 2
+    },
+    {
+      "firstName": "Joyce",
+      "lastName": "Bautista",
+      "age": 21,
+      "email": "joyce_bautista@hotmail.com",
+      "phone": 142124124,
+      "id": 3
+    },
+    {
+      "firstName": "Claudia",
+      "lastName": "Rosas",
+      "age": 21,
+      "email": "claudia_rosas@hotmail.com",
+      "phone": 124124212,
+      "id": 4
+    }
+  ],
+  "planes": [
+    {
+      "name": "Costa Azul",
+      "description": "Tour Playero",
+      "service": "Grupo",
+      "nameCity": "Piura",
+      "nameCountry": "Peru",
+      "startDate": 15,
+      "endDate": 18,
+      "price": 150,
+      "id": 2,
+      "agency": {
+        "name": "Lifetravel",
+        "location": "Av. Jiron Union",
+        "ruc": 1134231231,
+        "email": "patrick_cuentas@hotmail.com",
+        "phone": 124124124124,
+        "id": 2
+      }
+    }
+  ],
+  "agencies": [
+    {
+      "name": "Peru SAC",
+      "ruc": 12547895486,
+      "location": "Av. Collabamba 78",
+      "email": "perusac@hotmail.com",
+      "phone": 987456321,
+      "id": 1
+    }
+  ]
+}

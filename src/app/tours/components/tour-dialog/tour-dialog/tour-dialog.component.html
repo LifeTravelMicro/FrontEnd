@@ -1,0 +1,15 @@
+<div id="btn-container">
+  <button mat-button mat-dialog-close>X</button>
+</div>
+<h2 mat-dialog-title>Tour Images: {{data?.length }}</h2>
+<div mat-dialog-content>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2" *ngIf="data?.length > 0 && !!data">
+    <div *ngFor="let image of data">
+      <img [src]="image.path" alt="image" class="w-full aspect-video object-cover">
+    </div>
+  </div>
+  <div *ngIf="data?.length === 0 || data === null" class="h-[50vh] flex justify-center items-center">
+    <p class="text-2xl font-bold">No Tour Images</p>
+  </div>
+</div>
+

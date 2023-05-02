@@ -1,0 +1,107 @@
+<div class="table-wrapper">
+  <h1>Travelers Catalogue</h1>
+  <h2>{{ isEditMode ? "Edit Traveler" : "Add new Traveler" }}</h2>
+<!--  {{travelerData?.name | json}}-->
+  <form (submit)="onSubmit()" #travelerForm="ngForm">
+    <div class="grid grid-cols-2 gap-x-8">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          placeholder="John Doe"
+          name="name"
+          required
+          [(ngModel)]="travelerData.name"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="johndoe@hotmail.com"
+          name="email"
+          required
+          [(ngModel)]="travelerData.email"
+        />
+
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="123456789"
+          name="phone"
+          required
+          maxlength="9"
+          [(ngModel)]="travelerData.phone"
+        />
+      </mat-form-field>
+    </div>
+    <div class="text-center my-8">
+      <ng-container *ngIf="isEditMode; else elseTemplate">
+        <div class="flex flex-column gap-2 justify-center">
+          <button mat-button class="bg-[#ee21ba] text-[#ffffff] ">Update</button>
+          <button mat-button class="bg-[#ee21ba] text-[#ffffff]" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <button mat-button class="bg-[#ee21ba] text-[#ffffff]">Add</button>
+      </ng-template>
+    </div>
+  </form>
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>#Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+      <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="reviews">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Reviews</th>
+      <td mat-cell *matCellDef="let element">
+        <app-confirm-dialog [data]="element.reviews" type="traveler"></app-confirm-dialog>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <a href="javascript:void(0)" (click)="editItem(element)"
+          ><mat-icon>edit</mat-icon></a
+        >
+        |
+        <a href="javascript:void(0)" (click)="deleteItem(element.id)"
+          ><mat-icon>delete</mat-icon></a
+        >
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [ngClass]="{ 'editable-row': travelerData.id === row.id }"
+    ></tr>
+  </table>
+  <mat-paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 15]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

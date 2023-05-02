@@ -1,0 +1,146 @@
+
+<div class="flex justify-center items-center px-4">
+  <mat-tab-group class="bg-[#fff] px-4">
+
+
+    <mat-tab label="Tours">
+      <div class="table-wrapper">
+        <h1>Tour Form</h1>
+        <h2>{{ isEditMode ? "Edit Tour" : "Add new Tour" }}</h2>
+        <form (submit)="onSubmit()" #tourForm="ngForm">
+          <div class="grid grid-cols-2 gap-x-8">
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                placeholder="Location"
+                name="location"
+                required
+                [(ngModel)]="tourData.location"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                placeholder="Details"
+                name="details"
+                required
+                [(ngModel)]="tourData.details"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                placeholder="Price"
+                name="price"
+                required
+                [(ngModel)]="tourData.price"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                placeholder="Meeting Point"
+                name="meetingPoint"
+                required
+                [(ngModel)]="tourData.meetingPoint"
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Choose an agency</mat-label>
+              <mat-select name="agencyId" [(ngModel)]="tourData.agencyId" required>
+                <mat-option *ngFor="let agency of agencies" [value]="agency.id">
+                  {{ agency.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+          <div class="text-center my-8">
+            <ng-container *ngIf="isEditMode; else elseTemplate">
+              <div class="flex flex-column gap-2 justify-center">
+                <button mat-button class="bg-[#ee21ba] text-[#ffffff] ">Update</button>
+                <button mat-button class="bg-[#ee21ba] text-[#ffffff]" (click)="cancelEdit()">Cancel</button>
+              </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <button mat-button class="bg-[#ee21ba] text-[#ffffff]">Add</button>
+            </ng-template>
+          </div>
+        </form>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>#Id</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+            <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="details">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Details</th>
+            <td mat-cell *matCellDef="let element">{{ element.details }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+            <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="meetingPoint">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Meeting Point</th>
+            <td mat-cell *matCellDef="let element">{{ element.meetingPoint }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="agency">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Agency</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.agencyId }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="images">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Images</th>
+            <td mat-cell *matCellDef="let element">
+              <app-confirm-dialog [data]="element.tourImages" type="tour"></app-confirm-dialog>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element">
+<!--              <a href="javascript:void(0)" (click)="editItem(element)"-->
+<!--              ><mat-icon>edit</mat-icon></a-->
+<!--              >-->
+<!--              |-->
+              <a href="javascript:void(0)" (click)="deleteItem(element.id)"
+              ><mat-icon>delete</mat-icon></a
+              >
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            [ngClass]="{ 'editable-row': tourData.id === row.id }"
+          ></tr>
+        </table>
+        <mat-paginator
+          [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 15]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </mat-tab>
+
+
+    <mat-tab label="Tour Images">
+      <app-tours-images></app-tours-images>
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>

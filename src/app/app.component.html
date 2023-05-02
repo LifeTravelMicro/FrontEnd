@@ -1,0 +1,27 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a
+        *ngFor="let route of routes"
+        mat-list-item
+        [routerLink]="route.path"
+        (click)="sidenav.toggle()"
+      >
+        <span *ngIf="route?.path !== '**'">{{ capitalize(route?.path ?? "") }}</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="black-container">
+    <div style="height: 100vh">
+      <mat-toolbar color="primary">
+        <button mat-icon-button aria-label="Menu" (click)="sidenav.open()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <h1 id="title">
+          <a [routerLink]="'/travelers'">LifeTravel Dashboard</a>
+        </h1>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
